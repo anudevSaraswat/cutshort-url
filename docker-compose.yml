@@ -1,1 +1,9 @@
-
+services:
+  api:
+    build: ./api
+    ports:
+      - "3000:3000"
+  cache:
+    image: "redis:alpine"
+  db:
+    image: "mongo:latest"
