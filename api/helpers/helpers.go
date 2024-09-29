@@ -61,7 +61,7 @@ func getCounter() (int, error) {
 
 func ValidateURL(urlToValidate string) (*url.URL, bool) {
 
-	parsedURL, err := url.Parse(urlToValidate)
+	parsedURL, err := url.ParseRequestURI(urlToValidate)
 	if err != nil {
 		log.Default().Println("(validateURL) err in url.Parse:", err)
 		return nil, false
