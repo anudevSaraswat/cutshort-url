@@ -1,12 +1,19 @@
 import React, { useState } from "react";
+import axios from 'axios';
 
 const CutshortURL = () => {
     const [longUrl, setLongUrl] = useState("");
     const [shortUrl, setShortUrl] = useState("");
 
+    const apiURL = process.env.REACT_APP_API_URL;
+
     // Mock URL shortening function (you can replace this with an actual API call)
     const shortenUrl = (url) => {
-        return `https://short.ly/${Math.random().toString(36).substr(2, 5)}`;
+        const urlReq = {
+            url: url,
+        }
+        axios.post(`${apiURL}/api/shorten`, urlReq).then((resp) => setShortUrl(resp.data.url))
+            .catch((error) => alert(error));
     };
 
     const handleSubmit = (e) => {
@@ -32,7 +39,7 @@ const CutshortURL = () => {
             {shortUrl && (
                 <div className="result">
                     <p>Shortened URL:</p>
-                    <a href={shortUrl} target="_blank" rel="noopener noreferrer">
+                    <a href={`${apiURL}/api/resolve/${shortUrl}`} target="_blank" rel="noopener noreferrer">
                         {shortUrl}
                     </a>
                 </div>

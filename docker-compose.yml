@@ -2,8 +2,12 @@ services:
   api:
     build: ./api
     ports:
-      - "3000:3000"
+      - "8000:8000"
   cache:
     image: "redis:alpine"
   db:
     image: "mongo:latest"
+  app:
+    build: ./frontend
+    ports:
+      - "3000:3000"
