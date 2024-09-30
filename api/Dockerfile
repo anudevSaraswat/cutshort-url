@@ -10,5 +10,4 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
 FROM alpine:latest
 WORKDIR /app
 COPY --from=builder /docker-gs-ping /app/.env ./
-EXPOSE 3000
 CMD ["./docker-gs-ping"]
